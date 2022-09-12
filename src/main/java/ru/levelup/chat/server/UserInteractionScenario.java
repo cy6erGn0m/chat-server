@@ -1,5 +1,7 @@
 package ru.levelup.chat.server;
 
+import ru.levelup.chat.server.history.MessageHistory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;

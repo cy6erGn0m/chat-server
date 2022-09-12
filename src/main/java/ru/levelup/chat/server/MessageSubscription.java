@@ -20,7 +20,7 @@ public class MessageSubscription {
         }
     }
 
-    interface EventReceiver {
+    public interface EventReceiver {
         void onNewMessage(String message);
     }
 }

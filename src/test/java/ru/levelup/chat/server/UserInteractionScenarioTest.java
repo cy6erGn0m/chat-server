@@ -2,8 +2,11 @@ package ru.levelup.chat.server;
 
 import org.junit.Test;
 import org.mockito.Mockito;
+import ru.levelup.chat.server.history.InMemoryMessageHistory;
+import ru.levelup.chat.server.history.MessageHistory;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -14,7 +17,7 @@ public class UserInteractionScenarioTest {
     public void sendHistoryTest() {
         UserSession session = new UserSession();
         MessageSubscription subscription = new MessageSubscription();
-        MessageHistory history = new MessageHistory();
+        MessageHistory history = new InMemoryMessageHistory();
 
         PrintWriter writer = Mockito.mock(PrintWriter.class);
 
@@ -28,8 +31,8 @@ public class UserInteractionScenarioTest {
 
     @Test
     public void sendHistoryMultipleMessages() {
-        MessageHistory history = new MessageHistory();
-        PrintWriter writer = Mockito.mock(PrintWriter.class);
+        MessageHistory history = new InMemoryMessageHistory();
+        PrintWriter writer = mock(PrintWriter.class);
 
         for (int i = 0; i < 100; ++i) {
             history.addMessage("test message");

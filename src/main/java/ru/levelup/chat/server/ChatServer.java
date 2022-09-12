@@ -1,5 +1,10 @@
 package ru.levelup.chat.server;
 
+import ru.levelup.chat.server.history.DatabaseMessageHistory;
+import ru.levelup.chat.server.history.InMemoryMessageHistory;
+import ru.levelup.chat.server.history.MessageHistory;
+import ru.levelup.chat.server.history.WithoutMessageHistory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,9 +12,19 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.sql.SQLException;
 
 public class ChatServer {
-    private final MessageHistory messages = new MessageHistory();
+//    private final MessageHistory messages = new InMemoryMessageHistory();
+    private final MessageHistory messages;
+
+    {
+        try {
+            messages = new DatabaseMessageHistory("jdbc:postgre://..", "admin", "admin");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private final MessageSubscription subscription = new MessageSubscription();
 
