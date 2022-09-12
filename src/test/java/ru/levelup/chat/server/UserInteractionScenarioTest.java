@@ -8,8 +8,7 @@ import ru.levelup.chat.server.history.MessageHistory;
 import java.io.PrintWriter;
 import java.util.List;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.*;
 
 public class UserInteractionScenarioTest {
 
@@ -19,14 +18,14 @@ public class UserInteractionScenarioTest {
         MessageSubscription subscription = new MessageSubscription();
         MessageHistory history = new InMemoryMessageHistory();
 
-        PrintWriter writer = Mockito.mock(PrintWriter.class);
+        PrintWriter writer = mock(PrintWriter.class);
 
         history.addMessage("test message");
 
         UserInteractionScenario scenario = new UserInteractionScenario(session, subscription, history);
         scenario.sendHistory(writer);
 
-        Mockito.verify(writer).println("test message");
+        verify(writer).println("test message");
     }
 
     @Test
@@ -45,6 +44,44 @@ public class UserInteractionScenarioTest {
         );
         scenario.sendHistory(writer);
 
-        Mockito.verify(writer, times(10)).println("test message");
+        verify(writer, times(10)).println("test message");
+    }
+
+    @Test
+    public void sendHistoryNoMessage() {
+        MessageHistory history = mock(MessageHistory.class);
+        PrintWriter writer = mock(PrintWriter.class);
+
+        UserInteractionScenario scenario = new UserInteractionScenario(
+                mock(UserSession.class),
+                mock(MessageSubscription.class),
+                history
+        );
+        scenario.sendHistory(writer);
+
+        verify(writer, never()).println(anyString());
+    }
+
+    @Test
+    public void sendHistorySomeMessages() {
+        MessageHistory history = mock(MessageHistory.class);
+        PrintWriter writer = mock(PrintWriter.class);
+
+        when(history.getRecentMessage(0)).thenReturn(List.of());
+        when(history.getRecentMessage(1)).thenReturn(List.of("message2"));
+        when(history.getRecentMessage(anyInt())).thenReturn(List.of("Some message", "message2"));
+
+        UserInteractionScenario scenario = new UserInteractionScenario(
+                mock(UserSession.class),
+                mock(MessageSubscription.class),
+                history
+        );
+        scenario.sendHistory(writer);
+
+        verify(writer, times(1)).println("Some message");
+        verify(writer, atLeast(1)).println("Some message");
+        verify(writer, atMost(1)).println("message2");
+        verify(writer, never()).println("message3");
+        Mockito.verifyNoMoreInteractions(writer);
     }
 }
