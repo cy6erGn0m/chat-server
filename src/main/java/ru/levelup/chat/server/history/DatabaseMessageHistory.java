@@ -30,11 +30,6 @@ public class DatabaseMessageHistory implements MessageHistory {
     }
 
     @Override
-    public void onNewMessage(String message) {
-        addMessage(message);
-    }
-
-    @Override
     public void addMessage(String message) {
         try (Connection connection = connect()) {
             try (PreparedStatement pst = connection.prepareStatement("INSERT INTO messages (message) VALUES (?)")) {

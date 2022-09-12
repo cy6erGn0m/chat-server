@@ -8,11 +8,6 @@ public class InMemoryMessageHistory implements MessageHistory {
     private final List<String> messages = Collections.synchronizedList(new ArrayList<>());
 
     @Override
-    public void onNewMessage(String message) {
-        addMessage(message);
-    }
-
-    @Override
     public void addMessage(String message) {
         messages.add(message);
     }

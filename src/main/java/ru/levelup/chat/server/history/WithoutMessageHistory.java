@@ -12,8 +12,4 @@ public class WithoutMessageHistory implements MessageHistory {
     public List<String> getRecentMessages(int count) {
         return Collections.emptyList();
     }
-
-    @Override
-    public void onNewMessage(String message) {
-    }
 }
