@@ -67,9 +67,9 @@ public class UserInteractionScenarioTest {
         MessageHistory history = mock(MessageHistory.class);
         PrintWriter writer = mock(PrintWriter.class);
 
-        when(history.getRecentMessage(0)).thenReturn(List.of());
-        when(history.getRecentMessage(1)).thenReturn(List.of("message2"));
-        when(history.getRecentMessage(anyInt())).thenReturn(List.of("Some message", "message2"));
+        when(history.getRecentMessages(0)).thenReturn(List.of());
+        when(history.getRecentMessages(1)).thenReturn(List.of("message2"));
+        when(history.getRecentMessages(anyInt())).thenReturn(List.of("Some message", "message2"));
 
         UserInteractionScenario scenario = new UserInteractionScenario(
                 mock(UserSession.class),

@@ -18,7 +18,7 @@ public class InMemoryMessageHistory implements MessageHistory {
     }
 
     @Override
-    public List<String> getRecentMessage(int count) {
+    public List<String> getRecentMessages(int count) {
         synchronized (messages) {
             int firstIndex = messages.size() - count;
             if (firstIndex < 0) {

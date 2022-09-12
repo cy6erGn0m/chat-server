@@ -9,7 +9,7 @@ public class WithoutMessageHistory implements MessageHistory {
     }
 
     @Override
-    public List<String> getRecentMessage(int count) {
+    public List<String> getRecentMessages(int count) {
         return Collections.emptyList();
     }
 

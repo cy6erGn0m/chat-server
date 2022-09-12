@@ -8,5 +8,5 @@ public interface MessageHistory extends MessageSubscription.EventReceiver {
 
     void addMessage(String message);
 
-    List<String> getRecentMessage(int count);
+    List<String> getRecentMessages(int count);
 }

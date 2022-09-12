@@ -58,7 +58,7 @@ public class UserInteractionScenario {
     }
 
     public void sendHistory(PrintWriter writer) {
-        for (String message : messages.getRecentMessage(10)) {
+        for (String message : messages.getRecentMessages(10)) {
             writer.println(message);
         }
     }

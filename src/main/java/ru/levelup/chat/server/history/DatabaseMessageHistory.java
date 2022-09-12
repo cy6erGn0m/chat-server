@@ -47,7 +47,7 @@ public class DatabaseMessageHistory implements MessageHistory {
     }
 
     @Override
-    public List<String> getRecentMessage(int count) {
+    public List<String> getRecentMessages(int count) {
         try (Connection connection = connect()) {
             try (PreparedStatement pst = connection.prepareStatement("SELECT message FROM messages ORDER BY id DESC LIMIT ?")) {
                 pst.setInt(1, count);
