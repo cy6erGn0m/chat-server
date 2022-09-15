@@ -14,13 +14,13 @@ public class MessageSubscription {
         subscribers.remove(receiver);
     }
 
-    public void notifyAllSubscribers(String message) {
+    public void notifyAllSubscribers(String login, String message) {
         for (EventReceiver receiver : subscribers) {
-            receiver.onNewMessage(message);
+            receiver.onNewMessage(login, message);
         }
     }
 
     public interface EventReceiver {
-        void onNewMessage(String message);
+        void onNewMessage(String login, String message);
     }
 }

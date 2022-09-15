@@ -31,7 +31,7 @@ public class UserSession implements MessageSubscription.EventReceiver {
     }
 
     @Override
-    public void onNewMessage(String message) {
+    public void onNewMessage(String login, String message) {
         writer.println(message);
     }
 }

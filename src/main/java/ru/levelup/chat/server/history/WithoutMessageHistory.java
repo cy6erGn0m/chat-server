@@ -5,7 +5,7 @@ import java.util.List;
 
 public class WithoutMessageHistory implements MessageHistory {
     @Override
-    public void addMessage(String message) {
+    public void addMessage(String login, String message) {
     }
 
     @Override

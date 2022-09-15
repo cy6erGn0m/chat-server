@@ -8,11 +8,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseMessageHistory implements MessageHistory {
+public class JdbcDatabaseMessageHistory implements MessageHistory {
 
     private final DataSource connectionSource;
 
-    public DatabaseMessageHistory(String url, String login, String password) throws SQLException {
+    public JdbcDatabaseMessageHistory(String url, String login, String password) throws SQLException {
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl(url);
         config.setUsername(login);
@@ -30,7 +30,7 @@ public class DatabaseMessageHistory implements MessageHistory {
     }
 
     @Override
-    public void addMessage(String message) {
+    public void addMessage(String login, String message) {
         try (Connection connection = connect()) {
             try (PreparedStatement pst = connection.prepareStatement("INSERT INTO messages (message) VALUES (?)")) {
                 pst.setString(1, message);

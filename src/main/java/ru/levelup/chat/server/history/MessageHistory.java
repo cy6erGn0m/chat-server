@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface MessageHistory {
 
-    void addMessage(String message);
+    void addMessage(String login, String message);
 
     List<String> getRecentMessages(int count);
 }

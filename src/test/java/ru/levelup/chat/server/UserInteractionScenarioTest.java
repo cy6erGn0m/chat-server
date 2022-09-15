@@ -20,7 +20,7 @@ public class UserInteractionScenarioTest {
 
         PrintWriter writer = mock(PrintWriter.class);
 
-        history.addMessage("test message");
+        history.addMessage("user1", "test message");
 
         UserInteractionScenario scenario = new UserInteractionScenario(session, subscription, history);
         scenario.sendHistory(writer);
@@ -34,7 +34,7 @@ public class UserInteractionScenarioTest {
         PrintWriter writer = mock(PrintWriter.class);
 
         for (int i = 0; i < 100; ++i) {
-            history.addMessage("test message");
+            history.addMessage("user1", "test message");
         }
 
         UserInteractionScenario scenario = new UserInteractionScenario(

@@ -34,7 +34,7 @@ public class UserInteractionScenario {
             if (message == null) break;
             if (!message.isBlank()) {
                 String messageToSend = "[" + login + "] " + message;
-                subscription.notifyAllSubscribers(messageToSend);
+                subscription.notifyAllSubscribers(login, messageToSend);
             }
         } while (true);
     }

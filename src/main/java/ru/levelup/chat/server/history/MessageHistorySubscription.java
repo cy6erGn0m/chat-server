@@ -10,7 +10,7 @@ public class MessageHistorySubscription implements MessageSubscription.EventRece
     }
 
     @Override
-    public void onNewMessage(String message) {
-        history.addMessage(message);
+    public void onNewMessage(String login, String message) {
+        history.addMessage(login, message);
     }
 }

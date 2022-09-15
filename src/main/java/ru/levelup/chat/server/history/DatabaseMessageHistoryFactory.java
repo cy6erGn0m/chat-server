@@ -6,7 +6,7 @@ public class DatabaseMessageHistoryFactory implements AbstractMessageHistoryFact
     @Override
     public MessageHistory createMessageHistory() {
         try {
-            return new DatabaseMessageHistory("jdbc:postgre://..", "admin", "admin");
+            return new JdbcDatabaseMessageHistory("jdbc:postgre://..", "admin", "admin");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
